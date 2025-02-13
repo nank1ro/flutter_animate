@@ -315,7 +315,12 @@ class _AnimateState extends State<Animate> with SingleTickerProviderStateMixin {
     _delayed?.ignore();
     _initController();
     _updateValue();
-    _delayed = Future.delayed(widget.delay, () => _play());
+
+    if (widget.delay == Duration.zero) {
+      _play();
+    } else {
+      _delayed = Future.delayed(widget.delay, () => _play());
+    }
   }
 
   void _initController() {
